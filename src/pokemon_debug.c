@@ -732,47 +732,47 @@ static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bo
     LoadPalette(gDecompressionBuffer, 0x80 + battlerId * 16, 0x20);
 }
 
-static bool8 IsCastformForm(species)
-{
-    if (species == SPECIES_CASTFORM_SUNNY || species == SPECIES_CASTFORM_RAINY || species == SPECIES_CASTFORM_SNOWY)
-        return TRUE;
+//static bool8 IsCastformForm(species)
+//{
+//    if (species == SPECIES_CASTFORM_SUNNY || species == SPECIES_CASTFORM_RAINY || species == SPECIES_CASTFORM_SNOWY)
+//        return TRUE;
+//
+//    return FALSE;
+//}
 
-    return FALSE;
-}
+//static u8 GetCastformYCustom(species)
+//{
+//    u8 ret;
+//    switch (species)
+//    {
+//    case SPECIES_CASTFORM:
+//        ret = gCastformFrontSpriteCoords[CASTFORM_NORMAL].y_offset;
+//        break;
+//    case SPECIES_CASTFORM_SUNNY:
+//        ret = gCastformFrontSpriteCoords[CASTFORM_FIRE].y_offset;
+//       break;
+//    case SPECIES_CASTFORM_RAINY:
+//        ret = gCastformFrontSpriteCoords[CASTFORM_WATER].y_offset;
+//        break;
+//    case SPECIES_CASTFORM_SNOWY:
+//        ret = gCastformFrontSpriteCoords[CASTFORM_ICE].y_offset;
+//        break;
+//   }
+//    return ret;
+//}
 
-static u8 GetCastformYCustom(species)
-{
-    u8 ret;
-    switch (species)
-    {
-    case SPECIES_CASTFORM:
-        ret = gCastformFrontSpriteCoords[CASTFORM_NORMAL].y_offset;
-        break;
-    case SPECIES_CASTFORM_SUNNY:
-        ret = gCastformFrontSpriteCoords[CASTFORM_FIRE].y_offset;
-        break;
-    case SPECIES_CASTFORM_RAINY:
-        ret = gCastformFrontSpriteCoords[CASTFORM_WATER].y_offset;
-        break;
-    case SPECIES_CASTFORM_SNOWY:
-        ret = gCastformFrontSpriteCoords[CASTFORM_ICE].y_offset;
-        break;
-    }
-    return ret;
-}
-
-static u8 GetElevationValue(u16 species)
-{
-    u8 val;
-    if (species == SPECIES_CASTFORM)
-        val = sCastformElevations[0];
-    else if (IsCastformForm(species))
-        val = sCastformElevations[species - SPECIES_CASTFORM_SUNNY + 1];
-    else
-        val = gEnemyMonElevation[species];
-
-    return val;
-}
+//static u8 GetElevationValue(u16 species)
+//{
+//    u8 val;
+//    if (species == SPECIES_CASTFORM)
+//        val = sCastformElevations[0];
+//    else if (IsCastformForm(species))
+//        val = sCastformElevations[species - SPECIES_CASTFORM_SUNNY + 1];
+//    else
+//        val = gEnemyMonElevation[species];
+//
+//   return val;
+//}
 
 static void SetConstSpriteValues(struct PokemonDebugMenu *data)
 {

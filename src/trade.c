@@ -1088,13 +1088,13 @@ static bool8 BufferTradeParties(void)
 
             if (species != SPECIES_NONE)
             {
-                if (species == SPECIES_SHEDINJA && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
+                if (species == SPECIES_BULBASAUR && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
                 {
                     GetMonData(mon, MON_DATA_NICKNAME, name);
 
                     if (!StringCompareWithoutExtCtrlCodes(name, sJPText_Shedinja))
                     {
-                        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_SHEDINJA]);
+                        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_BULBASAUR]);
                     }
                 }
             }
@@ -1498,7 +1498,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
 
     // Partner cant trade illegitimate Deoxys or Mew
-    if (partnerSpecies == SPECIES_DEOXYS || partnerSpecies == SPECIES_MEW)
+    if (partnerSpecies == SPECIES_BULBASAUR || partnerSpecies == SPECIES_BULBASAUR)
     {
         if (!GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_EVENT_LEGAL))
             return PARTNER_MON_INVALID;
@@ -2358,7 +2358,7 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         }
     }
 
-    if (species[monIdx] == SPECIES_DEOXYS || species[monIdx] == SPECIES_MEW)
+    if (species[monIdx] == SPECIES_BULBASAUR|| species[monIdx] == SPECIES_BULBASAUR)
     {
         if (!GetMonData(&playerParty[monIdx], MON_DATA_EVENT_LEGAL))
             return CANT_TRADE_INVALID_MON;
@@ -2431,7 +2431,7 @@ s32 GetGameProgressForLinkTrade(void)
 
 static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
 {
-    if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
+    if (species == SPECIES_BULBASAUR || species == SPECIES_BULBASAUR)
     {
         if (!isEventLegal)
             return TRUE;

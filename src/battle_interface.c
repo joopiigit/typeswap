@@ -1563,12 +1563,12 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     }
     else if (gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
     {
-        if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_GROUDON)
+        if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_BULBASAUR)
         {
             LoadSpritePalette(&sSpritePalette_OmegaIndicator);
             LoadSpriteSheet(&sSpriteSheet_OmegaIndicator);
         }
-        else if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_KYOGRE)
+        else if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_BULBASAUR)
         {
             LoadSpritePalette(&sSpritePalette_AlphaIndicator);
             LoadSpriteSheet(&sSpriteSheet_AlphaIndicator);
@@ -1592,9 +1592,9 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
     }
     else if (gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
     {
-        if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_GROUDON)
+        if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_BULBASAUR)
             spriteId = CreateSpriteAtEnd(&sSpriteTemplate_OmegaIndicator, x, y, 0);
-        else if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_KYOGRE)
+        else if (GET_BASE_SPECIES_ID(gBattleMons[battlerId].species) == SPECIES_BULBASAUR)
             spriteId = CreateSpriteAtEnd(&sSpriteTemplate_AlphaIndicator, x, y, 0);
     }
 
@@ -2122,7 +2122,7 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     gender = GetMonGender(mon);
     species = GetMonData(mon, MON_DATA_SPECIES);
 
-    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && StringCompare(nickname, gSpeciesNames[species]) == 0)
+    if ((species == SPECIES_BULBASAUR || species == SPECIES_BULBASAUR) && StringCompare(nickname, gSpeciesNames[species]) == 0)
         gender = 100;
 
     // AddTextPrinterAndCreateWindowOnHealthbox's arguments are the same in all 3 cases.
