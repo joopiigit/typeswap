@@ -2765,7 +2765,7 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
     personality = Random32();
 
     CreateBoxMon(&boxMon,
-                 SPECIES_DEOXYS,
+                 SPECIES_BULBASAUR,
                  100,
                  32,
                  personality,

@@ -1382,33 +1382,33 @@ static bool32 NoTargetPresent(u8 battlerId, u32 move)
     return FALSE;
 }
 
-static bool32 TryAegiFormChange(void)
-{
-    // Only Aegislash with Stance Change can transform, transformed mons cannot.
-    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE
-        || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-
-    switch (gBattleMons[gBattlerAttacker].species)
-    {
-    default:
-        return FALSE;
-    case SPECIES_AEGISLASH: // Shield -> Blade
-        if (IS_MOVE_STATUS(gCurrentMove))
-            return FALSE;
-        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
-        break;
-    case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
-        if (gCurrentMove != MOVE_KINGS_SHIELD)
-            return FALSE;
-        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH;
-        break;
-    }
-
-    BattleScriptPushCursor();
-    gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
-    return TRUE;
-}
+//static bool32 TryAegiFormChange(void)
+//{
+//    // Only Aegislash with Stance Change can transform, transformed mons cannot.
+//    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE
+//        || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
+//        return FALSE;
+//
+//    switch (gBattleMons[gBattlerAttacker].species)
+//   {
+//    default:
+//       return FALSE;
+//    case SPECIES_AEGISLASH: // Shield -> Blade
+//        if (IS_MOVE_STATUS(gCurrentMove))
+//            return FALSE;
+//        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
+//        break;
+//    case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
+//        if (gCurrentMove != MOVE_KINGS_SHIELD)
+//            return FALSE;
+//        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH;
+//        break;
+//    }
+//
+//    BattleScriptPushCursor();
+//    gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
+//    return TRUE;
+//}
 
 static void Cmd_attackcanceler(void)
 {
@@ -2004,7 +2004,7 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
         critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
                     + ((gBattleMoves[gCurrentMove].flags & FLAG_HIGH_CRIT) != 0)
                     + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
-                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
+                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                 #if B_AFFECTION_MECHANICS == TRUE
                     + 2 * (GetBattlerFriendshipScore(gBattlerAttacker) >= FRIENDSHIP_200_TO_254)

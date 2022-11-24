@@ -3864,7 +3864,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 else if (ability == ABILITY_BATTLE_BOND
                 && gCurrentMove == MOVE_WATER_SHURIKEN
-                && gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_ASH)
+                && gBattleMons[gBattlerAttacker].species == SPECIES_BULBASAUR)
                 {
                     gMultiHitCounter = 3;
                 }
@@ -4109,7 +4109,7 @@ u8 TryWeatherFormChange(u8 battler)
 
     switch (gBattleMons[battler].species)
     {
-    case SPECIES_CASTFORM:
+    case SPECIES_BULBASAUR:
 /*  Placeholder
     case SPECIES_CASTFORM_RAINY:
     case SPECIES_CASTFORM_SNOWY:
@@ -4170,7 +4170,7 @@ u8 TryWeatherFormChange(u8 battler)
             ret = CASTFORM_ICE + 1;
         }
         break;
-    case SPECIES_CHERRIM:
+    case SPECIES_BULBASAUR:
 //  case SPECIES_CHERRIM_SUNSHINE:
         if (gBattleMons[battler].hp == 0)
             ret = 0; // No change
@@ -4258,18 +4258,18 @@ static bool32 ShouldChangeFormHpBased(u32 battler)
     // Ability,     form >, form <=, hp divided
     static const u16 forms[][4] =
     {
-        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN, SPECIES_DARMANITAN_ZEN_MODE, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR, SPECIES_MINIOR_CORE_RED, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_BLUE, SPECIES_MINIOR_CORE_BLUE, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_GREEN, SPECIES_MINIOR_CORE_GREEN, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_INDIGO, SPECIES_MINIOR_CORE_INDIGO, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_ORANGE, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_VIOLET, SPECIES_MINIOR_CORE_VIOLET, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_YELLOW, SPECIES_MINIOR_CORE_YELLOW, 2},
-        {ABILITY_SCHOOLING, SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI, 4},
-        {ABILITY_GULP_MISSILE, SPECIES_CRAMORANT, SPECIES_CRAMORANT_GORGING, 2},
-        {ABILITY_GULP_MISSILE, SPECIES_CRAMORANT, SPECIES_CRAMORANT_GULPING, 1},
-        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN_GALARIAN, SPECIES_DARMANITAN_ZEN_MODE_GALARIAN, 2},
+        {ABILITY_ZEN_MODE, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_SCHOOLING, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 4},
+        {ABILITY_GULP_MISSILE, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
+        {ABILITY_GULP_MISSILE, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 1},
+        {ABILITY_ZEN_MODE, SPECIES_BULBASAUR, SPECIES_BULBASAUR, 2},
     };
     u32 i;
     u16 battlerAbility = GetBattlerAbility(battler);
@@ -5036,16 +5036,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 if ((effect = ShouldChangeFormHpBased(battler)))
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
                 break;
-            case ABILITY_POWER_CONSTRUCT:
-                if ((gBattleMons[battler].species == SPECIES_ZYGARDE || gBattleMons[battler].species == SPECIES_ZYGARDE_10)
-                    && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
-                {
-                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[battler]] = gBattleMons[battler].species;
-                    gBattleMons[battler].species = SPECIES_ZYGARDE_COMPLETE;
-                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
-                    effect++;
-                }
-                break;
+//            case ABILITY_POWER_CONSTRUCT:
+//                if ((gBattleMons[battler].species == SPECIES_ZYGARDE || gBattleMons[battler].species == SPECIES_ZYGARDE_10)
+//                    && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
+//                {
+//                   gBattleStruct->changedSpecies[gBattlerPartyIndexes[battler]] = gBattleMons[battler].species;
+//                    gBattleMons[battler].species = SPECIES_ZYGARDE_COMPLETE;
+//                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
+//                    effect++;
+//                }
+//                break;
             case ABILITY_BALL_FETCH:
                 if (gBattleMons[battler].item == ITEM_NONE
                     && gBattleResults.catchAttempts[gLastUsedBall - ITEM_ULTRA_BALL] >= 1
@@ -5060,21 +5060,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     effect++;
                 }
                 break;
-            case ABILITY_HUNGER_SWITCH:
-                if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
-                {
-                    if (gBattleMons[battler].species == SPECIES_MORPEKO)
-                    {
-                        gBattleMons[battler].species = SPECIES_MORPEKO_HANGRY;
-                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
-                    }
-                    else if (gBattleMons[battler].species == SPECIES_MORPEKO_HANGRY)
-                    {
-                        gBattleMons[battler].species = SPECIES_MORPEKO;
-                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
-                    }
-                    effect++;
-                }
+//            case ABILITY_HUNGER_SWITCH:
+//                if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
+//                {
+//                    if (gBattleMons[battler].species == SPECIES_MORPEKO)
+//                    {
+//                        gBattleMons[battler].species = SPECIES_MORPEKO_HANGRY;
+//                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
+//                    }
+//                    else if (gBattleMons[battler].species == SPECIES_MORPEKO_HANGRY)
+//                    {
+//                        gBattleMons[battler].species = SPECIES_MORPEKO;
+//                        BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
+//                    }
+//                    effect++;
+//                }
                 break;
             }
         }
@@ -5686,42 +5686,42 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
-        case ABILITY_GULP_MISSILE:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(battler))
-            {
-                if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
-                {
-                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
-                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
-                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
-                    {
-                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-                        if (gBattleMoveDamage == 0)
-                            gBattleMoveDamage = 1;
-                    }
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
-                    effect++;
-                }
-                else if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
-                {
-                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
-                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
-                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
-                    {
-                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
-                        if (gBattleMoveDamage == 0)
-                            gBattleMoveDamage = 1;
-                    }
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
-                    effect++;
-                }
-            }
-            break;
+//        case ABILITY_GULP_MISSILE:
+//            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+//             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+//             && TARGET_TURN_DAMAGED
+//             && IsBattlerAlive(battler))
+//            {
+//                if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
+//                {
+//                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
+//                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
+//                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+//                    {
+//                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+//                       if (gBattleMoveDamage == 0)
+//                            gBattleMoveDamage = 1;
+//                    }
+//                    BattleScriptPushCursor();
+//                   gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
+//                    effect++;
+//                }
+//                else if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
+//                {
+//                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerTarget]] = gBattleMons[gBattlerTarget].species;
+//                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
+//                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+//                    {
+//                        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+//                        if (gBattleMoveDamage == 0)
+//                            gBattleMoveDamage = 1;
+//                    }
+//                    BattleScriptPushCursor();
+//                    gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
+//                    effect++;
+//                }
+//            }
+//            break;
         }
         break;
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
@@ -5894,13 +5894,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         {
             switch (gBattleMons[battler].species)
             {
-            case SPECIES_CASTFORM:
-            case SPECIES_CHERRIM:
+//            case SPECIES_CASTFORM:
+//            case SPECIES_CHERRIM:
 #ifdef POKEMON_EXPANSION
-            case SPECIES_CASTFORM_RAINY:
-            case SPECIES_CASTFORM_SNOWY:
-            case SPECIES_CASTFORM_SUNNY:
-            case SPECIES_CHERRIM_SUNSHINE:
+//            case SPECIES_CASTFORM_RAINY:
+//            case SPECIES_CASTFORM_SNOWY:
+//            case SPECIES_CASTFORM_SUNNY:
+//            case SPECIES_CHERRIM_SUNSHINE:
 #endif
                 effect = TryWeatherFormChange(battler);
                 if (effect != 0)
@@ -7834,15 +7834,15 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
     return targetBattler;
 }
 
-static bool32 IsMonEventLegal(u8 battlerId)
-{
-    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
-        return TRUE;
-    if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
-        && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
-            return TRUE;
-    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
-}
+//static bool32 IsMonEventLegal(u8 battlerId)
+//{
+//    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+//        return TRUE;
+//    if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
+//        && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
+//            return TRUE;
+//    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
+//}
 
 u8 IsMonDisobedient(void)
 {
@@ -8543,10 +8543,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     // Move-specific base power changes
     switch (move)
     {
-    case MOVE_WATER_SHURIKEN:
-        if (gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
-            basePower = 20;
-        break;
+//    case MOVE_WATER_SHURIKEN:
+//        if (gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
+//            basePower = 20;
+//        break;
     }
 
     if (basePower == 0)
@@ -8748,26 +8748,26 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (IS_MOVE_SPECIAL(move))
             MulModifier(&modifier, holdEffectModifier);
         break;
-    case HOLD_EFFECT_LUSTROUS_ORB:
-        if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_PALKIA && (moveType == TYPE_WATER || moveType == TYPE_DRAGON))
-            MulModifier(&modifier, holdEffectModifier);
-        break;
-    case HOLD_EFFECT_ADAMANT_ORB:
-        if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_DIALGA && (moveType == TYPE_STEEL || moveType == TYPE_DRAGON))
-            MulModifier(&modifier, holdEffectModifier);
-        break;
-    case HOLD_EFFECT_GRISEOUS_ORB:
-        if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_GIRATINA && (moveType == TYPE_GHOST || moveType == TYPE_DRAGON))
-            MulModifier(&modifier, holdEffectModifier);
-        break;
-    case HOLD_EFFECT_SOUL_DEW:
-    #if B_SOUL_DEW_BOOST >= GEN_7
-        if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && (moveType == TYPE_PSYCHIC || moveType == TYPE_DRAGON))
-    #else
-        if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && IS_MOVE_SPECIAL(move))
-    #endif
-            MulModifier(&modifier, holdEffectModifier);
-        break;
+//    case HOLD_EFFECT_LUSTROUS_ORB:
+//        if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_PALKIA && (moveType == TYPE_WATER || moveType == TYPE_DRAGON))
+//            MulModifier(&modifier, holdEffectModifier);
+//        break;
+//    case HOLD_EFFECT_ADAMANT_ORB:
+//        if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_DIALGA && (moveType == TYPE_STEEL || moveType == TYPE_DRAGON))
+//            MulModifier(&modifier, holdEffectModifier);
+//       break;
+//    case HOLD_EFFECT_GRISEOUS_ORB:
+//        if (GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_GIRATINA && (moveType == TYPE_GHOST || moveType == TYPE_DRAGON))
+//            MulModifier(&modifier, holdEffectModifier);
+//        break;
+//    case HOLD_EFFECT_SOUL_DEW:
+//    #if B_SOUL_DEW_BOOST >= GEN_7
+//        if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && (moveType == TYPE_PSYCHIC || moveType == TYPE_DRAGON))
+//    #else
+//        if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS) && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && IS_MOVE_SPECIAL(move))
+//    #endif
+//            MulModifier(&modifier, holdEffectModifier);
+//        break;
     case HOLD_EFFECT_GEMS:
         if (gSpecialStatuses[battlerAtk].gemBoost && gBattleMons[battlerAtk].item)
             MulModifier(&modifier, UQ_4_12(1.0) + sPercentToModifier[gSpecialStatuses[battlerAtk].gemParam]);
@@ -8999,10 +8999,10 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     #endif
-    case ABILITY_FLOWER_GIFT:
-        if (gBattleMons[battlerAtk].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
-            MulModifier(&modifier, UQ_4_12(1.5));
-        break;
+//    case ABILITY_FLOWER_GIFT:
+//        if (gBattleMons[battlerAtk].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(battlerAtk, B_WEATHER_SUN) && IS_MOVE_PHYSICAL(move))
+//            MulModifier(&modifier, UQ_4_12(1.5));
+//        break;
     case ABILITY_HUSTLE:
         if (IS_MOVE_PHYSICAL(move))
             MulModifier(&modifier, UQ_4_12(1.5));
@@ -9049,18 +9049,18 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
     // attacker's hold effect
     switch (GetBattlerHoldEffect(battlerAtk, TRUE))
     {
-    case HOLD_EFFECT_THICK_CLUB:
-        if ((atkBaseSpeciesId == SPECIES_CUBONE || atkBaseSpeciesId == SPECIES_MAROWAK) && IS_MOVE_PHYSICAL(move))
-            MulModifier(&modifier, UQ_4_12(2.0));
-        break;
-    case HOLD_EFFECT_DEEP_SEA_TOOTH:
-        if (gBattleMons[battlerAtk].species == SPECIES_CLAMPERL && IS_MOVE_SPECIAL(move))
-            MulModifier(&modifier, UQ_4_12(2.0));
-        break;
-    case HOLD_EFFECT_LIGHT_BALL:
-        if (atkBaseSpeciesId == SPECIES_PIKACHU)
-            MulModifier(&modifier, UQ_4_12(2.0));
-        break;
+//    case HOLD_EFFECT_THICK_CLUB:
+//        if ((atkBaseSpeciesId == SPECIES_CUBONE || atkBaseSpeciesId == SPECIES_MAROWAK) && IS_MOVE_PHYSICAL(move))
+//            MulModifier(&modifier, UQ_4_12(2.0));
+//        break;
+//    case HOLD_EFFECT_DEEP_SEA_TOOTH:
+//        if (gBattleMons[battlerAtk].species == SPECIES_CLAMPERL && IS_MOVE_SPECIAL(move))
+//            MulModifier(&modifier, UQ_4_12(2.0));
+//        break;
+//    case HOLD_EFFECT_LIGHT_BALL:
+//        if (atkBaseSpeciesId == SPECIES_PIKACHU)
+//            MulModifier(&modifier, UQ_4_12(2.0));
+//        break;
     case HOLD_EFFECT_CHOICE_BAND:
         if (IS_MOVE_PHYSICAL(move))
             MulModifier(&modifier, UQ_4_12(1.5));
@@ -9176,10 +9176,10 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
                 RecordAbilityBattle(battlerDef, ABILITY_GRASS_PELT);
         }
         break;
-    case ABILITY_FLOWER_GIFT:
-        if (gBattleMons[battlerDef].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN) && !usesDefStat)
-            MulModifier(&modifier, UQ_4_12(1.5));
-        break;
+//    case ABILITY_FLOWER_GIFT:
+//        if (gBattleMons[battlerDef].species == SPECIES_CHERRIM && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN) && !usesDefStat)
+//            MulModifier(&modifier, UQ_4_12(1.5));
+//        break;
     case ABILITY_PUNK_ROCK:
         if (gBattleMoves[move].flags & FLAG_SOUND)
             MulModifier(&modifier, UQ_4_12(2.0));
@@ -9201,14 +9201,14 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
     // target's hold effects
     switch (GetBattlerHoldEffect(battlerDef, TRUE))
     {
-    case HOLD_EFFECT_DEEP_SEA_SCALE:
-        if (gBattleMons[battlerDef].species == SPECIES_CLAMPERL && !usesDefStat)
-            MulModifier(&modifier, UQ_4_12(2.0));
-        break;
-    case HOLD_EFFECT_METAL_POWDER:
-        if (gBattleMons[battlerDef].species == SPECIES_DITTO && usesDefStat && !(gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED))
-            MulModifier(&modifier, UQ_4_12(2.0));
-        break;
+//    case HOLD_EFFECT_DEEP_SEA_SCALE:
+//        if (gBattleMons[battlerDef].species == SPECIES_CLAMPERL && !usesDefStat)
+//            MulModifier(&modifier, UQ_4_12(2.0));
+//        break;
+//    case HOLD_EFFECT_METAL_POWDER:
+//        if (gBattleMons[battlerDef].species == SPECIES_DITTO && usesDefStat && !(gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED))
+//            MulModifier(&modifier, UQ_4_12(2.0));
+//        break;
     case HOLD_EFFECT_EVIOLITE:
         if (CanEvolve(gBattleMons[battlerDef].species))
             MulModifier(&modifier, UQ_4_12(1.5));
@@ -9825,12 +9825,12 @@ void UndoMegaEvolution(u32 monId)
         CalculateMonStats(&gPlayerParty[monId]);
     }
     // While not exactly a mega evolution, Zygarde follows the same rules.
-    else if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
-    {
-        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
-        gBattleStruct->changedSpecies[monId] = 0;
-        CalculateMonStats(&gPlayerParty[monId]);
-    }
+//    else if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
+//    {
+//        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+//        gBattleStruct->changedSpecies[monId] = 0;
+//        CalculateMonStats(&gPlayerParty[monId]);
+//    }
 }
 
 void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
@@ -9840,23 +9840,23 @@ void UndoFormChange(u32 monId, u32 side, bool32 isSwitchingOut)
     static const u16 species[][3] =
     {
         // Changed Form ID                      Default Form ID               Should change on switch
-        {SPECIES_MIMIKYU_BUSTED,                SPECIES_MIMIKYU,              FALSE},
-        {SPECIES_GRENINJA_ASH,                  SPECIES_GRENINJA_BATTLE_BOND, FALSE},
-        {SPECIES_MELOETTA_PIROUETTE,            SPECIES_MELOETTA,             FALSE},
-        {SPECIES_AEGISLASH_BLADE,               SPECIES_AEGISLASH,            TRUE},
-        {SPECIES_DARMANITAN_ZEN_MODE,           SPECIES_DARMANITAN,           TRUE},
-        {SPECIES_MINIOR,                        SPECIES_MINIOR_CORE_RED,      TRUE},
-        {SPECIES_MINIOR_METEOR_BLUE,            SPECIES_MINIOR_CORE_BLUE,     TRUE},
-        {SPECIES_MINIOR_METEOR_GREEN,           SPECIES_MINIOR_CORE_GREEN,    TRUE},
-        {SPECIES_MINIOR_METEOR_INDIGO,          SPECIES_MINIOR_CORE_INDIGO,   TRUE},
-        {SPECIES_MINIOR_METEOR_ORANGE,          SPECIES_MINIOR_CORE_ORANGE,   TRUE},
-        {SPECIES_MINIOR_METEOR_VIOLET,          SPECIES_MINIOR_CORE_VIOLET,   TRUE},
-        {SPECIES_MINIOR_METEOR_YELLOW,          SPECIES_MINIOR_CORE_YELLOW,   TRUE},
-        {SPECIES_WISHIWASHI_SCHOOL,             SPECIES_WISHIWASHI,           TRUE},
-        {SPECIES_CRAMORANT_GORGING,             SPECIES_CRAMORANT,            TRUE},
-        {SPECIES_CRAMORANT_GULPING,             SPECIES_CRAMORANT,            TRUE},
-        {SPECIES_MORPEKO_HANGRY,                SPECIES_MORPEKO,              TRUE},
-        {SPECIES_DARMANITAN_ZEN_MODE_GALARIAN,  SPECIES_DARMANITAN_GALARIAN,  TRUE},
+//        {SPECIES_MIMIKYU_BUSTED,                SPECIES_MIMIKYU,              FALSE},
+//        {SPECIES_GRENINJA_ASH,                  SPECIES_GRENINJA_BATTLE_BOND, FALSE},
+//        {SPECIES_MELOETTA_PIROUETTE,            SPECIES_MELOETTA,             FALSE},
+//        {SPECIES_AEGISLASH_BLADE,               SPECIES_AEGISLASH,            TRUE},
+//        {SPECIES_DARMANITAN_ZEN_MODE,           SPECIES_DARMANITAN,           TRUE},
+//        {SPECIES_MINIOR,                        SPECIES_MINIOR_CORE_RED,      TRUE},
+//        {SPECIES_MINIOR_METEOR_BLUE,            SPECIES_MINIOR_CORE_BLUE,     TRUE},
+//        {SPECIES_MINIOR_METEOR_GREEN,           SPECIES_MINIOR_CORE_GREEN,    TRUE},
+//        {SPECIES_MINIOR_METEOR_INDIGO,          SPECIES_MINIOR_CORE_INDIGO,   TRUE},
+//        {SPECIES_MINIOR_METEOR_ORANGE,          SPECIES_MINIOR_CORE_ORANGE,   TRUE},
+//        {SPECIES_MINIOR_METEOR_VIOLET,          SPECIES_MINIOR_CORE_VIOLET,   TRUE},
+//        {SPECIES_MINIOR_METEOR_YELLOW,          SPECIES_MINIOR_CORE_YELLOW,   TRUE},
+//        {SPECIES_WISHIWASHI_SCHOOL,             SPECIES_WISHIWASHI,           TRUE},
+//        {SPECIES_CRAMORANT_GORGING,             SPECIES_CRAMORANT,            TRUE},
+//        {SPECIES_CRAMORANT_GULPING,             SPECIES_CRAMORANT,            TRUE},
+//        {SPECIES_MORPEKO_HANGRY,                SPECIES_MORPEKO,              TRUE},
+//        {SPECIES_DARMANITAN_ZEN_MODE_GALARIAN,  SPECIES_DARMANITAN_GALARIAN,  TRUE},
     };
 
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
@@ -9915,14 +9915,14 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
     // Mega stone cannot be lost if pokemon's base species can mega evolve with it.
     else if (holdEffect == HOLD_EFFECT_MEGA_STONE && (GetMegaEvolutionSpecies(GET_BASE_SPECIES_ID(species), itemId) != SPECIES_NONE))
         return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GENESECT && holdEffect == HOLD_EFFECT_DRIVE)
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_SILVALLY && holdEffect == HOLD_EFFECT_MEMORY)
-        return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS && holdEffect == HOLD_EFFECT_PLATE)
-        return FALSE;
+//    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
+//        return FALSE;
+//    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GENESECT && holdEffect == HOLD_EFFECT_DRIVE)
+//        return FALSE;
+//    else if (GET_BASE_SPECIES_ID(species) == SPECIES_SILVALLY && holdEffect == HOLD_EFFECT_MEMORY)
+//        return FALSE;
+//    else if (GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS && holdEffect == HOLD_EFFECT_PLATE)
+//        return FALSE;
 #ifdef HOLD_EFFECT_Z_CRYSTAL
     else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
         return FALSE;
@@ -10441,45 +10441,45 @@ bool32 TryRoomService(u8 battlerId)
     }
 }
 
-void DoBurmyFormChange(u32 monId)
-{
-    u16 newSpecies, currSpecies;
-    struct Pokemon *party = gPlayerParty;
-
-    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
-
-    if ((GET_BASE_SPECIES_ID(currSpecies) == SPECIES_BURMY)
-        && (gBattleStruct->appearedInBattle & gBitTable[monId]) // Burmy appeared in battle
-        && GetMonData(&party[monId], MON_DATA_HP, NULL) != 0) // Burmy isn't fainted
-    {
-        switch (gBattleTerrain)
-        {
-            case BATTLE_TERRAIN_GRASS:
-            case BATTLE_TERRAIN_LONG_GRASS:
-            case BATTLE_TERRAIN_POND:
-            case BATTLE_TERRAIN_MOUNTAIN:
-            case BATTLE_TERRAIN_PLAIN:
-                newSpecies = SPECIES_BURMY;
-                break;
-            case BATTLE_TERRAIN_CAVE:
-            case BATTLE_TERRAIN_SAND:
-                newSpecies = SPECIES_BURMY_SANDY_CLOAK;
-                break;
-            case BATTLE_TERRAIN_BUILDING:
-                newSpecies = SPECIES_BURMY_TRASH_CLOAK;
-                break;
-            default: // Don't change form if last battle was water-related
-                newSpecies = SPECIES_NONE;
-                break;
-        }
-
-        if (newSpecies != SPECIES_NONE)
-        {
-            SetMonData(&party[monId], MON_DATA_SPECIES, &newSpecies);
-            CalculateMonStats(&party[monId]);
-        }
-    }
-}
+//void DoBurmyFormChange(u32 monId)
+//{
+//    u16 newSpecies, currSpecies;
+//    struct Pokemon *party = gPlayerParty;
+//
+//    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
+//
+//    if ((GET_BASE_SPECIES_ID(currSpecies) == SPECIES_BURMY)
+//        && (gBattleStruct->appearedInBattle & gBitTable[monId]) // Burmy appeared in battle
+//        && GetMonData(&party[monId], MON_DATA_HP, NULL) != 0) // Burmy isn't fainted
+//    {
+//        switch (gBattleTerrain)
+//        {
+//            case BATTLE_TERRAIN_GRASS:
+//            case BATTLE_TERRAIN_LONG_GRASS:
+//            case BATTLE_TERRAIN_POND:
+//            case BATTLE_TERRAIN_MOUNTAIN:
+//            case BATTLE_TERRAIN_PLAIN:
+//                newSpecies = SPECIES_BURMY;
+//                break;
+//            case BATTLE_TERRAIN_CAVE:
+//            case BATTLE_TERRAIN_SAND:
+//                newSpecies = SPECIES_BURMY_SANDY_CLOAK;
+//                break;
+//            case BATTLE_TERRAIN_BUILDING:
+//               newSpecies = SPECIES_BURMY_TRASH_CLOAK;
+//                break;
+//            default: // Don't change form if last battle was water-related
+//                newSpecies = SPECIES_NONE;
+//                break;
+//        }
+//
+//        if (newSpecies != SPECIES_NONE)
+//        {
+//            SetMonData(&party[monId], MON_DATA_SPECIES, &newSpecies);
+//            CalculateMonStats(&party[monId]);
+//        }
+//   }
+//}
 
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget)
 {
