@@ -204,11 +204,11 @@ u16 GetIconSpecies(u16 species, u32 personality)
 {
     u16 result;
 
-    if (species == SPECIES_UNOWN)
-    {
-        result = GetUnownSpeciesId(personality);
-    }
-    else
+//    if (species == SPECIES_UNOWN)
+//    {
+//        result = GetUnownSpeciesId(personality);
+//    }
+//    else
     {
         if (species > NUM_SPECIES)
             result = INVALID_ICON_SPECIES;
@@ -231,12 +231,12 @@ u16 GetIconSpeciesNoPersonality(u16 species)
 {
     u16 value;
 
-    if (MailSpeciesToSpecies(species, &value) == SPECIES_UNOWN)
-    {
-        value += SPECIES_UNOWN_B; // TODO
-        return value;
-    }
-    else
+//    if (MailSpeciesToSpecies(species, &value) == SPECIES_UNOWN)
+//    {
+//        value += SPECIES_UNOWN_B; // TODO
+//        return value;
+//   }
+//    else
     {
         if (species > NUM_SPECIES)
             species = INVALID_ICON_SPECIES;

@@ -1626,12 +1626,12 @@ static void OpponentHandleChooseMove(void)
                 static const u16 naturalEnemies[][2] =
                 {
                     // Attacker         Target
-                    {SPECIES_ZANGOOSE,  SPECIES_SEVIPER},
-                    {SPECIES_SEVIPER,   SPECIES_ZANGOOSE},
-                    {SPECIES_HEATMOR,   SPECIES_DURANT},
-                    {SPECIES_DURANT,    SPECIES_HEATMOR},
-                    {SPECIES_SABLEYE,   SPECIES_CARBINK},
-                    {SPECIES_MAREANIE,  SPECIES_CORSOLA},
+                    {SPECIES_BULBASAUR,   SPECIES_BULBASAUR},
+                    {SPECIES_BULBASAUR,   SPECIES_BULBASAUR},
+                    {SPECIES_BULBASAUR,   SPECIES_BULBASAUR},
+                    {SPECIES_BULBASAUR,   SPECIES_BULBASAUR},
+                    {SPECIES_BULBASAUR,   SPECIES_BULBASAUR},
+                    {SPECIES_BULBASAUR,   SPECIES_BULBASAUR},
                 };
                 speciesAttacker = gBattleMons[gActiveBattler].species;
                 speciesTarget = gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(gActiveBattler))].species;
